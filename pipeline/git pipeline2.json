@@ -15,11 +15,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"p2": {
-				"type": "int"
-			}
-		},
 		"annotations": []
 	}
 }

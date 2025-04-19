@@ -15,12 +15,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"wait1": {
-				"type": "int",
-				"defaultValue": 10
-			}
-		},
 		"annotations": []
 	}
 }
