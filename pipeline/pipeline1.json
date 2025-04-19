@@ -17,7 +17,8 @@
 		],
 		"parameters": {
 			"wait1": {
-				"type": "int"
+				"type": "int",
+				"defaultValue": 10
 			}
 		},
 		"annotations": []
