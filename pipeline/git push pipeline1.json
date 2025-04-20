@@ -1,5 +1,5 @@
 {
-	"name": "git pipeline2",
+	"name": "git push pipeline1",
 	"properties": {
 		"activities": [
 			{
@@ -8,10 +8,7 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": {
-						"value": "@pipeline().parameters.p2",
-						"type": "Expression"
-					}
+					"waitTimeInSeconds": 1
 				}
 			}
 		],
