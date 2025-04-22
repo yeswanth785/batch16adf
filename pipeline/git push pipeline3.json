@@ -1,23 +1,95 @@
 {
-	"name": "git push pipeline1",
+	"name": "git push pipeline3",
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait1",
-				"type": "Wait",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": {
-						"value": "@pipeline().parameters.p1",
+					"items": {
+						"value": "@variables('var')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('var')",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@greater(item(), 4)",
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "ForEach2",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter1').output.ItemsCount",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Wait2",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
 			}
 		],
-		"parameters": {
-			"p1": {
-				"type": "int"
+		"variables": {
+			"var": {
+				"type": "Array",
+				"defaultValue": [
+					2,
+					3,
+					5,
+					6,
+					8,
+					9
+				]
 			}
 		},
 		"annotations": []
